@@ -4,8 +4,32 @@ on:
   push:
     branches: [ main ]
 jobs:
-  check:
-    name: Check project code
+  test:
+    name: Test project code
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        toolchain: [ stable, nightly ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        id: toolchain
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.toolchain }}
+          override: true
+      - name: Configure Rust cache
+        uses: Swatinem/rust-cache@v2.0.0
+        with:
+          key: test-${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ hashFiles('**/Cargo.lock') }}
+      - name: Run test
+        run: cargo test
+  coverage:
+    name: Coverage project code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -17,11 +41,10 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          components: rustfmt, clippy
-      - name: Init Rust cache
+      - name: Configure Rust cache
         uses: Swatinem/rust-cache@v2.0.0
-      - name: Run clippy
-        run: cargo clippy --all-targets -- -D warnings
+        with:
+          key: coverage-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
         with:
@@ -36,3 +59,32 @@ jobs:
         with:
           name: code-coverage-report
           path: cobertura.xml
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        id: toolchain
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - name: Install pre-commit
+        run: pip install --no-cache-dir pre-commit
+      - name: Configure Rust cache
+        uses: Swatinem/rust-cache@v2.0.0
+        with:
+          key: lint-${{ runner.os }}-rust-${{ hashFiles('**/Cargo.lock') }}
+      - name: Configure pre-commit cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: lint-${{ runner.os }}-pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
+      - name: Run pre-commit
+        run: pre-commit run --all-files

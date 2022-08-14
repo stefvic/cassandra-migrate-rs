@@ -9,3 +9,6 @@ version = "0.1.0"
 [[package]]
 name = "cassandra-migrate-rs-cli"
 version = "0.1.0"
+dependencies = [
+ "cassandra-migrate-rs",
+]
