@@ -1,6 +1,7 @@
 [package]
 name = "cassandra-migrate-rs-cli"
 version = "0.1.0"
+authors = ["stefvic <victor.stefoglo@gmail.com>"]
 edition = "2021"
 
 description = "Provides CLI tool for Cassadnra migration"
