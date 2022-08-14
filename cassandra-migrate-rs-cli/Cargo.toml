@@ -1,0 +1,17 @@
+[package]
+name = "cassandra-migrate-rs-cli"
+version = "0.1.0"
+edition = "2021"
+
+description = "Provides CLI tool for Cassadnra migration"
+documentation = "https://docs.rs/cassandra-migrate-rs"
+homepage = "https://github.com/stefvic/cassandra-migrate-rs"
+repository = "https://github.com/stefvic/cassandra-migrate-rs"
+readme = "README.md"
+categories = ["database"]
+keywords = ["migration", "cql", "cassandra", "cli"]
+license = "MIT/Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
