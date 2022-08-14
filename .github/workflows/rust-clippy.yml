@@ -36,6 +36,8 @@ jobs:
           toolchain: stable
           components: clippy
           override: true
+      - name: Init Rust cache
+        uses: Swatinem/rust-cache@v2.0.0
       - name: Install required cargo
         run: cargo install clippy-sarif sarif-fmt
       - name: Run rust-clippy
