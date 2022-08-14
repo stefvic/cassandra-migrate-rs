@@ -1,5 +1,5 @@
 # cassandra-migrate-rs
-
+[![codecov](https://codecov.io/gh/stefvic/cassandra-migrate-rs/branch/main/graph/badge.svg?token=EQ9734RGGG)](https://codecov.io/gh/stefvic/cassandra-migrate-rs)
 ## License
 
 This project is licensed under either of
