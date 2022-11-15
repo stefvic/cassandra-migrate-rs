@@ -37,7 +37,7 @@ jobs:
           components: clippy
           override: true
       - name: Init Rust cache
-        uses: Swatinem/rust-cache@v2.0.1
+        uses: Swatinem/rust-cache@v2.2.0
         with:
           shared-key: clippy-${{ runner.os }}
       - name: Install required cargo
