@@ -14,7 +14,7 @@ jobs:
         toolchain: [ stable, nightly ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         id: toolchain
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         id: toolchain
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         id: toolchain
