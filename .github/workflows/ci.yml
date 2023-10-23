@@ -23,7 +23,7 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           override: true
       - name: Configure Rust cache
-        uses: Swatinem/rust-cache@v2.7.0
+        uses: Swatinem/rust-cache@v2.7.1
         with:
           shared-key: test-${{ runner.os }}-cargo-${{ matrix.toolchain }}
       - name: Run test
@@ -42,7 +42,7 @@ jobs:
           toolchain: stable
           override: true
       - name: Configure Rust cache
-        uses: Swatinem/rust-cache@v2.7.0
+        uses: Swatinem/rust-cache@v2.7.1
         with:
           shared-key: coverage-${{ runner.os }}
       - name: Run cargo-tarpaulin
@@ -78,7 +78,7 @@ jobs:
       - name: Install pre-commit
         run: pip install --no-cache-dir pre-commit
       - name: Configure Rust cache
-        uses: Swatinem/rust-cache@v2.7.0
+        uses: Swatinem/rust-cache@v2.7.1
         with:
           shared-key: lint-${{ runner.os }}
       - name: Configure pre-commit cache
