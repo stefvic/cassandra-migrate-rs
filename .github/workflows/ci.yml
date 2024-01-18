@@ -82,7 +82,7 @@ jobs:
         with:
           shared-key: lint-${{ runner.os }}
       - name: Configure pre-commit cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
           key: lint-${{ runner.os }}-pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
